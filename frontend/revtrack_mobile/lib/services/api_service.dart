@@ -542,15 +542,21 @@ class ApiService {
     required String endDate,
   }) async {
     try {
-      return await _dio.get(
+      final response = await _dio.get(
         '/export/pdf',
         queryParameters: {
           'startup_id': startupId.toString(),
           'start_date': startDate,
           'end_date': endDate,
         },
-        options: Options(responseType: ResponseType.bytes),
+        options: Options(
+          responseType: ResponseType.bytes,
+          headers: {
+            'Accept': 'application/pdf',
+          },
+        ),
       );
+      return response;
     } catch (e) {
       throw _handleError(e);
     }
@@ -562,20 +568,25 @@ class ApiService {
     required String endDate,
   }) async {
     try {
-      return await _dio.get(
+      final response = await _dio.get(
         '/export/excel',
         queryParameters: {
           'startup_id': startupId.toString(),
           'start_date': startDate,
           'end_date': endDate,
         },
-        options: Options(responseType: ResponseType.bytes),
+        options: Options(
+          responseType: ResponseType.bytes,
+          headers: {
+            'Accept': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          },
+        ),
       );
+      return response;
     } catch (e) {
       throw _handleError(e);
     }
   }
-
   // ============ NOTIFICATIONS ============
   Future<Map<String, dynamic>> getNotificationConfig() async {
     try {
