@@ -99,6 +99,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // ============================================================
     Route::get('/export/pdf', [ExportController::class, 'exportPDF']);
     Route::get('/export/excel', [ExportController::class, 'exportExcel']);
+    Route::get('/export/csv', [ExportController::class, 'exportCSV']);
 
     // ============================================================
     // NOTIFICATIONS
